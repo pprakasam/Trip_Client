@@ -8,6 +8,11 @@ import SignUp from './auth/components/SignUp'
 import SignIn from './auth/components/SignIn'
 import SignOut from './auth/components/SignOut'
 import ChangePassword from './auth/components/ChangePassword'
+import CreateTrip from './Trip/CreateTrip'
+import ShowTrips from './Trip/ShowTrips'
+import ShowTrip from './Trip/ShowTrip'
+import TripEdit from './Trip/TripEdit'
+import MyTrips from './Trip/MyTrips'
 
 import Alert from 'react-bootstrap/Alert'
 
@@ -54,6 +59,21 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword alert={this.alert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/create-trip' render={() => (
+            <CreateTrip user={user} />
+          )} />
+          <AuthenticatedRoute user={user} exact path='/trips' render={() => (
+            <ShowTrips user={user} />
+          )} />
+          <AuthenticatedRoute user={user} exact path="/trips/:id" render={(props) => (
+            <ShowTrip user={user} {...props}/>
+          )} />
+          <AuthenticatedRoute user={user} exact path="/trips/:id/edit" render={(props) => (
+            <TripEdit user={user} {...props}/>
+          )} />
+          <AuthenticatedRoute user={user} exact path="/tripfamilies" render={() => (
+            <MyTrips user={user} />
           )} />
         </main>
       </React.Fragment>
