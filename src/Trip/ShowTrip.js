@@ -108,6 +108,8 @@ class ShowTrip extends Component {
           <Fragment>
             <Link to={this.props.match.url + '/edit'}><button>Edit</button></Link>
             <button type="button" onClick={() => this.deleteTrip(id)}>Delete</button>
+            <Link to={this.props.match.url + '/items'}><button>Add Items</button></Link>
+            <Link to={this.props.match.url + '/showtripitems'}><button>Show Items</button></Link>
           </Fragment>
           }
         </div>

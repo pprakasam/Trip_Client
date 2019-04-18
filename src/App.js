@@ -13,6 +13,9 @@ import ShowTrips from './Trip/ShowTrips'
 import ShowTrip from './Trip/ShowTrip'
 import TripEdit from './Trip/TripEdit'
 import MyTrips from './Trip/MyTrips'
+import CreateItem from './Items/CreateItem'
+import ShowTripItems from './Items/ShowTripItems'
+import ShowMyTripItems from './Items/ShowMyTripItems'
 
 import Alert from 'react-bootstrap/Alert'
 
@@ -72,8 +75,17 @@ class App extends Component {
           <AuthenticatedRoute user={user} exact path="/trips/:id/edit" render={(props) => (
             <TripEdit user={user} {...props}/>
           )} />
-          <AuthenticatedRoute user={user} exact path="/tripfamilies" render={() => (
-            <MyTrips user={user} />
+          <AuthenticatedRoute user={user} exact path="/tripfamilies" render={(props) => (
+            <MyTrips user={user} {...props}/>
+          )} />
+          <AuthenticatedRoute user={user} exact path="/trips/:id/items" render={(props) => (
+            <CreateItem user={user} {...props}/>
+          )} />
+          <AuthenticatedRoute user={user} exact path="/trips/:id/showtripitems" render={(props) => (
+            <ShowTripItems user={user} {...props}/>
+          )} />
+          <AuthenticatedRoute user={user} exact path="/trips/:id/showmytripitems" render={(props) => (
+            <ShowMyTripItems user={user} {...props}/>
           )} />
         </main>
       </React.Fragment>

@@ -58,23 +58,26 @@ class TripEdit extends Component {
     const { place, street, city, state, zip } = trip
     return (
       <Fragment>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="place">Place</label> <br />
-          <input value={place} name="place" onChange={this.handleChange}/> <br />
-          <label htmlFor="street">Street</label> <br />
-          <input value={street} name="street" onChange={this.handleChange}/> <br />
-          <label htmlFor="city">City</label> <br />
-          <input value={city} name="city" onChange={this.handleChange}/> <br />
-          <label htmlFor="state">State</label> <br />
-          <input value={state} name="state" onChange={this.handleChange}/> <br />
-          <label htmlFor="zip">Zip</label> <br />
-          <input value={zip} name="zip" onChange={this.handleChange}/> <br />
-          <label htmlFor="from_date">From</label> <br />
-          <input name="from_date" value={this.state.trip.from_date} type="date" onChange={this.handleChange} /> <br />
-          <label htmlFor="to_date">To</label> <br />
-          <input name="to_date" type="date" value={this.state.trip.to_date} onChange={this.handleChange} /> <br />
-          <button type="submit">Submit</button>
-        </form>
+        <div className="create-form">
+          <div className="form-header">Edit Trip</div>
+          <form onSubmit={this.handleSubmit}>
+            <label htmlFor="place"><span>Place</span>
+              <input value={place} name="place" onChange={this.handleChange}/></label>
+            <label htmlFor="street"><span>Street</span>
+              <input value={street} name="street" onChange={this.handleChange}/></label>
+            <label htmlFor="city"><span>City</span>
+              <input value={city} name="city" onChange={this.handleChange}/></label>
+            <label htmlFor="state"><span>State</span>
+              <input value={state} name="state" onChange={this.handleChange}/></label>
+            <label htmlFor="zip"><span>Zip</span>
+              <input value={zip} name="zip" onChange={this.handleChange}/></label>
+            <label htmlFor="from_date"><span>From</span>
+              <input name="from_date" value={this.state.trip.from_date} type="date" onChange={this.handleChange} /></label>
+            <label htmlFor="to_date"><span>To</span>
+              <input name="to_date" value={this.state.trip.to_date} type="date" onChange={this.handleChange} /></label>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
       </Fragment>
     )
   }

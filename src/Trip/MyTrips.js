@@ -31,7 +31,6 @@ class MyTrips extends Component {
   }
 
   render () {
-    console.log(this.state.mytrips)
     if (this.state.mytrips.length === 0) {
       return <p>No trips to show</p>
     }
@@ -44,8 +43,11 @@ class MyTrips extends Component {
         <ul>
           {this.state.mytrips.map(mytrip => (
             <li key={mytrip.id}>
-              <h5><Link to={'/trips/' + mytrip.trip_id}>{mytrip.place}</Link></h5>
-              <button type="button" onClick={() => this.deleteMyTrip(mytrip.id)}>Delete</button>
+              <p>
+                <Link to={'/trips/' + mytrip.trip_id}>{mytrip.place}</Link>
+                <Link to={`/trips/${mytrip.trip_id}/showmytripitems`}><button>Show My Items</button></Link>
+                <button type="button" onClick={() => this.deleteMyTrip(mytrip.id)}>Delete</button>
+              </p>
             </li>
           ))}
         </ul>

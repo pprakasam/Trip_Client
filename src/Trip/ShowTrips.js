@@ -29,7 +29,7 @@ class ShowTrips extends Component {
     return (
       <Fragment>
         <div className="trip">
-          <h4>Trips:</h4>
+          <div className="form-header">All Trips</div>
           <div>
             <ul>
               {this.state.trips.map(trip => (
