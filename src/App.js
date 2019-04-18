@@ -13,6 +13,9 @@ import ShowTrips from './Trip/ShowTrips'
 import ShowTrip from './Trip/ShowTrip'
 import TripEdit from './Trip/TripEdit'
 import MyTrips from './Trip/MyTrips'
+import CreateItem from './Items/CreateItem'
+import ShowTripItems from './Items/ShowTripItems'
+import ShowMyTripItems from './Items/ShowMyTripItems'
 
 import Alert from 'react-bootstrap/Alert'
 
@@ -61,19 +64,28 @@ class App extends Component {
             <ChangePassword alert={this.alert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/create-trip' render={() => (
-            <CreateTrip user={user} />
+            <CreateTrip alert={this.alert} user={user} />
           )} />
           <AuthenticatedRoute user={user} exact path='/trips' render={() => (
-            <ShowTrips user={user} />
+            <ShowTrips alert={this.alert} user={user} />
           )} />
           <AuthenticatedRoute user={user} exact path="/trips/:id" render={(props) => (
-            <ShowTrip user={user} {...props}/>
+            <ShowTrip alert={this.alert} user={user} {...props}/>
           )} />
           <AuthenticatedRoute user={user} exact path="/trips/:id/edit" render={(props) => (
-            <TripEdit user={user} {...props}/>
+            <TripEdit alert={this.alert} user={user} {...props}/>
           )} />
-          <AuthenticatedRoute user={user} exact path="/tripfamilies" render={() => (
-            <MyTrips user={user} />
+          <AuthenticatedRoute user={user} exact path="/tripfamilies" render={(props) => (
+            <MyTrips alert={this.alert} user={user} {...props}/>
+          )} />
+          <AuthenticatedRoute user={user} exact path="/trips/:id/items" render={(props) => (
+            <CreateItem alert={this.alert} user={user} {...props}/>
+          )} />
+          <AuthenticatedRoute user={user} exact path="/trips/:id/showtripitems" render={(props) => (
+            <ShowTripItems alert={this.alert} user={user} {...props}/>
+          )} />
+          <AuthenticatedRoute user={user} exact path="/trips/:id/showmytripitems" render={(props) => (
+            <ShowMyTripItems alert={this.alert} user={user} {...props}/>
           )} />
         </main>
       </React.Fragment>
