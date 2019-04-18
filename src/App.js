@@ -64,28 +64,28 @@ class App extends Component {
             <ChangePassword alert={this.alert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/create-trip' render={() => (
-            <CreateTrip user={user} />
+            <CreateTrip alert={this.alert} user={user} />
           )} />
           <AuthenticatedRoute user={user} exact path='/trips' render={() => (
-            <ShowTrips user={user} />
+            <ShowTrips alert={this.alert} user={user} />
           )} />
           <AuthenticatedRoute user={user} exact path="/trips/:id" render={(props) => (
-            <ShowTrip user={user} {...props}/>
+            <ShowTrip alert={this.alert} user={user} {...props}/>
           )} />
           <AuthenticatedRoute user={user} exact path="/trips/:id/edit" render={(props) => (
-            <TripEdit user={user} {...props}/>
+            <TripEdit alert={this.alert} user={user} {...props}/>
           )} />
           <AuthenticatedRoute user={user} exact path="/tripfamilies" render={(props) => (
-            <MyTrips user={user} {...props}/>
+            <MyTrips alert={this.alert} user={user} {...props}/>
           )} />
           <AuthenticatedRoute user={user} exact path="/trips/:id/items" render={(props) => (
-            <CreateItem user={user} {...props}/>
+            <CreateItem alert={this.alert} user={user} {...props}/>
           )} />
           <AuthenticatedRoute user={user} exact path="/trips/:id/showtripitems" render={(props) => (
-            <ShowTripItems user={user} {...props}/>
+            <ShowTripItems alert={this.alert} user={user} {...props}/>
           )} />
           <AuthenticatedRoute user={user} exact path="/trips/:id/showmytripitems" render={(props) => (
-            <ShowMyTripItems user={user} {...props}/>
+            <ShowMyTripItems alert={this.alert} user={user} {...props}/>
           )} />
         </main>
       </React.Fragment>

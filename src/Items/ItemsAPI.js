@@ -22,9 +22,9 @@ export const ShowItems = (user, id) => {
   })
 }
 
-export const ShowMyItems = (user, id, tripId) => {
+export const ShowMyItems = (user, userName, tripId) => {
   return axios({
-    url: apiUrl + `/showmyitems/${tripId}/${id}`,
+    url: apiUrl + `/showmyitems/${tripId}/${userName}`,
     method: 'GET',
     headers: {
       'Authorization': `Token token=${user.token}`
@@ -32,9 +32,9 @@ export const ShowMyItems = (user, id, tripId) => {
   })
 }
 
-export const UpdateTripItems = (user, tripId, itemsArray, item) => {
+export const UpdateTripItems = (user, tripId, itemsArray, userName, item) => {
   return axios({
-    url: apiUrl + `/items/${tripId}/${itemsArray}`,
+    url: apiUrl + `/items/${tripId}/${itemsArray}/${userName}`,
     method: 'PATCH',
     headers: {
       'Authorization': `Token token=${user.token}`

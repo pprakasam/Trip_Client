@@ -27,7 +27,7 @@
 	padding: 20px 12px 10px 20px;
 }
 
-.form-header{
+.form-header {
 	font-weight: bold;
 	font-style: italic;
 	border-bottom: 2px solid #ddd;
@@ -51,7 +51,13 @@
 
 .create-form button {
 	border: 0;
+  margin: 10px;
 	padding: 8px 15px 8px 15px;
 	background: #FF8500;
 	color: #fff;
+}
+
+.span-heading {
+  font-size: 16px;
+  font-weight: bold;
 }

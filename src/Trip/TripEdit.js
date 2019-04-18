@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import { Redirect } from 'react-router'
 import { ShowOneTrip, EditTrip } from './TripAPI'
+import messages from '../auth/messages'
+import { withRouter } from 'react-router-dom'
 
 class TripEdit extends Component {
   constructor () {
@@ -17,26 +19,24 @@ class TripEdit extends Component {
     const id = this.props.match.params.id
     const { user } = this.props
     ShowOneTrip(user, id)
-    // axios.get(`${apiUrl}/trips/${id}`)
       .then(response => this.setState({ trip: response.data.trip }))
       .catch(console.log)
   }
 
   handleSubmit = (event) => {
+    const { alert, history } = this.props
     const { trip } = this.state
     const { user } = this.props
     event.preventDefault()
     EditTrip(user, trip.id, trip)
-    // axios({
-    //   url: `${apiUrl}/trips/${trip.id}`,
-    //   method: 'patch',
-    //   data: { trip }
-    // })
       .then(() => this.setState({ updated: true }))
-      .catch(() => this.setState({
-        trip: { ...trip, title: '', director: '', year: '' },
-        message: 'Update failed. Please fill out all fields and try again'
-      }))
+      .then(() => alert(messages.EditTripSuccess, 'success'))
+      .then(() => history.push('/'))
+      .catch(error => {
+        console.error(error)
+        this.setState({ place: '', street: '', city: '', state: '', zip: '', from_date: '', to_date: '', families_joining: '', user_id: '' })
+        alert(messages.EditTripFailure, 'danger')
+      })
   }
 
   handleChange = (event) => {
@@ -62,19 +62,19 @@ class TripEdit extends Component {
           <div className="form-header">Edit Trip</div>
           <form onSubmit={this.handleSubmit}>
             <label htmlFor="place"><span>Place</span>
-              <input value={place} name="place" onChange={this.handleChange}/></label>
+              <input value={place} required name="place" onChange={this.handleChange}/></label>
             <label htmlFor="street"><span>Street</span>
-              <input value={street} name="street" onChange={this.handleChange}/></label>
+              <input value={street} required name="street" onChange={this.handleChange}/></label>
             <label htmlFor="city"><span>City</span>
-              <input value={city} name="city" onChange={this.handleChange}/></label>
+              <input value={city} required name="city" onChange={this.handleChange}/></label>
             <label htmlFor="state"><span>State</span>
-              <input value={state} name="state" onChange={this.handleChange}/></label>
+              <input value={state} required name="state" onChange={this.handleChange}/></label>
             <label htmlFor="zip"><span>Zip</span>
-              <input value={zip} name="zip" onChange={this.handleChange}/></label>
+              <input value={zip} required name="zip" onChange={this.handleChange}/></label>
             <label htmlFor="from_date"><span>From</span>
-              <input name="from_date" value={this.state.trip.from_date} type="date" onChange={this.handleChange} /></label>
+              <input name="from_date" required value={this.state.trip.from_date} type="date" onChange={this.handleChange} /></label>
             <label htmlFor="to_date"><span>To</span>
-              <input name="to_date" value={this.state.trip.to_date} type="date" onChange={this.handleChange} /></label>
+              <input name="to_date" required value={this.state.trip.to_date} type="date" onChange={this.handleChange} /></label>
             <button type="submit">Submit</button>
           </form>
         </div>
@@ -83,4 +83,4 @@ class TripEdit extends Component {
   }
 }
 
-export default TripEdit
+export default withRouter(TripEdit)

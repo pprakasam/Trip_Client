@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { ShowMyItems, RemoveItem } from './ItemsAPI'
 import { Redirect } from 'react-router'
+import '../Trip/Trip.scss'
 
 class ShowMyTripItems extends Component {
   constructor () {
@@ -16,7 +17,8 @@ class ShowMyTripItems extends Component {
     const tripId = this.props.match.params.id
     console.log(tripId)
     const { user } = this.props
-    ShowMyItems(user, user.id, tripId)
+    const userName = user.email.slice(0, (user.email.indexOf('@')))
+    ShowMyItems(user, userName, tripId)
       .then(response => this.setState({
         items: response.data.items
       }))
@@ -43,20 +45,23 @@ class ShowMyTripItems extends Component {
     }
 
     if (this.state.items.length === 0) {
-      return <p>Loading......</p>
+      return <h2>No items to show. Select items you like to bring to the Trip</h2>
     }
+
     return (
       <Fragment>
-        <h4>My Items: </h4>
-        <ul>
-          {this.state.items.map(item => (
-            <li key={item.id}>
-              <p>
-                { item.item_name } { <button type="button" onClick={() => this.removeItem(item.id)}>Remove</button> }
-              </p>
-            </li>
-          ))}
-        </ul>
+        <div className="create-form">
+          <div className="form-header">My Items</div>
+          <ul>
+            {this.state.items.map(item => (
+              <li key={item.id}>
+                <p>
+                  { item.item_name } { <button type="button" onClick={() => this.removeItem(item.id)}>Remove</button> }
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </Fragment>
     )
   }

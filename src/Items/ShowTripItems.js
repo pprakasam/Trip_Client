@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { ShowItems, UpdateTripItems } from './ItemsAPI'
+import messages from '../auth/messages'
+import { withRouter } from 'react-router-dom'
 
 class ShowTripItems extends Component {
   constructor () {
@@ -27,43 +29,55 @@ class ShowTripItems extends Component {
   }
 
   handleSubmit = (event) => {
+    const { alert, history } = this.props
     const tripId = this.props.match.params.id
     const { user } = this.props
+    const userName = user.email.slice(0, (user.email.indexOf('@')))
     const item = {
-      assigned_to: user.id
+      assigned_to: user.email.slice(0, (user.email.indexOf('@')))
     }
     this.setState({ itemsArray: [ ...this.state.itemsArray, event.target.name ] })
     console.log(this.state.itemsArray)
     event.preventDefault()
-    UpdateTripItems(user, tripId, this.state.itemsArray, item)
-      .then(console.log)
-      .catch(console.log)
+    UpdateTripItems(user, tripId, this.state.itemsArray, userName, item)
+      .then(() => alert(messages.updateTripItemsSuccess, 'success'))
+      .then(() => history.push('/'))
+      .catch(error => {
+        console.error(error)
+        alert(messages.updateTripItemsFailure, 'danger')
+      })
   }
 
   render () {
     const { user } = this.props
+    console.log(this.state.items)
+    const submitFlag = this.state.items.some(item => (
+      item.assigned_to === ''
+    ))
     if (this.state.items.length === 0) {
-      return <p>Loading......</p>
+      return <h2>Items not added yet. Start adding items to the Trip</h2>
     }
     return (
       <Fragment>
-        <h4>Items:</h4>
-        <form onSubmit={this.handleSubmit}>
-          <ul>
-            {this.state.items.map(item => (
-              <li key={item.id}>
-                <p>{ item.item_name }
-                  { item.assigned_to ? item.assigned_to
-                    : <input type="checkbox" onChange={this.handleChange} name={item.item_name} value={user.id} /> }
-                </p>
-              </li>
-            ))}
-          </ul>
-          <button type="submit">Add Items to my list</button>
-        </form>
+        <div className="create-form">
+          <div className="form-header">Items:</div>
+          <form onSubmit={this.handleSubmit}>
+            <ul>
+              {this.state.items.map(item => (
+                <li key={item.id}>
+                  <p><label><span>{ item.item_name }</span></label>
+                    { item.assigned_to ? item.assigned_to
+                      : <input type="checkbox" onChange={this.handleChange} name={item.item_name} value={user.id} /> }
+                  </p>
+                </li>
+              ))}
+            </ul>
+            { submitFlag && <button type="submit">Add Items to my list</button> }
+          </form>
+        </div>
       </Fragment>
     )
   }
 }
 
-export default ShowTripItems
+export default withRouter(ShowTripItems)

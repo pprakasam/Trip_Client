@@ -24,7 +24,7 @@ class ShowTrips extends Component {
   render () {
     console.log(this.state.trips)
     if (this.state.trips.length === 0) {
-      return <p>Loading......</p>
+      return <h2>No Trips to Show</h2>
     }
     return (
       <Fragment>

@@ -8,5 +8,15 @@ export default {
   signOutSuccess: 'Come back soon!',
   changePasswordSuccess: 'Password changed successfully!',
   changePasswordFailure: 'Failed to change passwords. Check your old password' +
-                         ' and try again.'
+                         ' and try again.',
+  createTripSuccess: 'Succesfully added a Trip!',
+  createTripFailure: 'Failed to add a Trip. Enter valid data!',
+  EditTripSuccess: 'Succesfully edited Trip Details!',
+  EditTripFailure: 'Failed to edit Trip Details. Check data!',
+  RemoveTripSuccess: 'Succesfully removed Trip!',
+  RemoveTripFailure: 'Failed to remove Trip!',
+  updateTripItemsSuccess: 'Succesfully added items to your list!',
+  updateTripItemsFailure: 'Failed to add items to your list!',
+  joinTripSuccess: 'Succesfully joined the Trip!',
+  joinTripFailure: 'Failed to join the Trip!'
 }

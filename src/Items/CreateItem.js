@@ -43,11 +43,12 @@ class CreateItem extends Component {
   }
 
   render () {
+    const id = this.props.match.params.id
     const { item } = this.state.items
     if (this.state.created) {
       return (
         <Redirect to={{
-          pathname: '/trips', state: { message: 'Successfully Added Item!' }
+          pathname: `/trips/${id}`, state: { message: 'Successfully Added Item!' }
         }} />
       )
     }

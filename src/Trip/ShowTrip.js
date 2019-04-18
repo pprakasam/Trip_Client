@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { Redirect } from 'react-router'
 import { ShowOneTrip, DeleteTrip, JoinTrip } from './TripAPI'
 import './Trip.scss'
+import messages from '../auth/messages'
 // import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react'
 
 class ShowTrip extends Component {
@@ -37,7 +38,7 @@ class ShowTrip extends Component {
   }
 
   joinTrip (id, place) {
-    console.log('IN JOIN TRIP------')
+    const { alert, history } = this.props
     const { user } = this.props
     const tripfamily = {
       trip_id: id,
@@ -49,7 +50,12 @@ class ShowTrip extends Component {
       .then(response => this.setState({
         join: true
       }))
-      .catch(console.log)
+      .then(() => alert(messages.joinTripSuccess, 'success'))
+      .then(() => history.push('/tripfamilies'))
+      .catch(error => {
+        console.error(error)
+        alert(messages.joinTripFailure, 'danger')
+      })
   }
 
   render () {
@@ -67,20 +73,21 @@ class ShowTrip extends Component {
       return <p>Loading......</p>
     }
 
-    if (this.state.join) {
-      return <Redirect to={'/trips'} />
-    }
+    // if (this.state.join) {
+    //   return <Redirect to={'/trips'} />
+    // }
 
     return (
       <Fragment>
-        <div className="show-trip">
-          <h2>{place}</h2>
+        <div className="create-form">
+          <div className="form-header">{place}</div>
+          <h6><span className="span-heading">Address</span></h6>
           <h6>{street}</h6>
           <h6>{city}</h6>
           <h6>{state}</h6>
           <h6>{zip}</h6>
-          <h6>{this.state.trip.from_date}</h6>
-          <h6>{this.state.trip.to_date}</h6>
+          <h6> <span className="span-heading">From:</span> {this.state.trip.from_date} <span className="span-heading">To:</span>  {this.state.trip.to_date}</h6>
+          <h6> <span className="span-heading">People Joined the Trip</span></h6>
           <ul>
             {tripfamilies.map(trip => (
               <li key={trip.id}>
@@ -118,4 +125,4 @@ class ShowTrip extends Component {
   }
 }
 
-export default ShowTrip
+export default withRouter(ShowTrip)
