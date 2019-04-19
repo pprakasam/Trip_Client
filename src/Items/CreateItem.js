@@ -8,6 +8,10 @@ class CreateItem extends Component {
 
     this.state = {
       user: null,
+      moreItems: [{
+        item_name: '',
+        trip_id: ''
+      }],
       items: {
         item_name: '',
         assigned_to: '',
@@ -20,31 +24,46 @@ class CreateItem extends Component {
   handleChange = (event) => {
     const id = this.props.match.params.id
     const { user } = this.props
+    const tripId = 'trip_id'
     console.log(user)
     console.log(event.target.name, event.target.value)
-    this.setState({ items: { ...this.state.items,
-      [event.target.name]: event.target.value,
-      trip_id: id
-    } })
+    if (['item_name'].includes(event.target.className)) {
+      const items = [...this.state.moreItems]
+      items[event.target.dataset.id][event.target.className] = event.target.value
+      items[event.target.dataset.id][tripId] = id
+      this.setState({ items }, () => console.log(this.state.items))
+    } else {
+      this.setState({ [event.target.name]: event.target.value })
+    }
+    // this.setState({ items: { ...this.state.items,
+    //   [event.target.name]: event.target.value,
+    //   trip_id: id
+    // } })
   }
 
   handleSubmit = (event) => {
-    console.log(this.state.items)
+    console.log(this.state.moreItems)
     const { user } = this.props
     event.preventDefault()
-    AddItem(user, this.state.items)
+    AddItem(user, this.state.moreItems)
       .then(response => this.setState({
-        created: true,
-        items: response.data.item
+        created: true
+        // items: response.data.item
       }))
       .catch(error => {
         console.error(error)
       })
   }
+  addItems = (event) => {
+    this.setState({
+      moreItems: [...this.state.moreItems, { item_name: '' }]
+    })
+  }
 
   render () {
     const id = this.props.match.params.id
-    const { item } = this.state.items
+    // const { item } = this.state.items
+
     if (this.state.created) {
       return (
         <Redirect to={{
@@ -57,8 +76,18 @@ class CreateItem extends Component {
         <div className="create-form">
           <div className="form-header">Enter Item to Add</div>
           <form onSubmit={this.handleSubmit}>
-            <label htmlFor="item_name"><span>Item</span>
-              <input value={item} name="item_name" required onChange={this.handleChange}/></label>
+            {
+              this.state.moreItems.map((item, index) => {
+                const itemId = `item${index}`
+                return (
+                  <div key={index}>
+                    <label htmlFor={itemId}><span>Item</span>
+                      <input data-id={index} name={itemId} className="item_name"required onChange={this.handleChange}/></label>
+                  </div>
+                )
+              })
+            }
+            <button type="button" onClick={this.addItems}>Add Items</button>
             <button type="submit">Submit</button>
           </form>
         </div>

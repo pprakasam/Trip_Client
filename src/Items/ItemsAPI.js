@@ -1,14 +1,14 @@
 import apiUrl from '../apiConfig'
 import axios from 'axios'
 
-export const AddItem = (user, item) => {
+export const AddItem = (user, items) => {
   return axios({
     url: apiUrl + '/items',
     method: 'POST',
     headers: {
       'Authorization': `Token token=${user.token}`
     },
-    data: { item }
+    data: { items }
   })
 }
 
