@@ -13,7 +13,7 @@
 <h6>REACT, BOOTSTRAP, ES6</h6>
 
 <h3>Wireframe</h3>
-<img src="http://imgur.com/h8xXtzZ">
+![](https://i.imgur.com/h8xXtzZ.jpg)
 <h3>User Stories</h3>
 <ol>
   <li>User can Sign-up/Sign-in</li>
