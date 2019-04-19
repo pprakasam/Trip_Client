@@ -52,7 +52,7 @@ class ShowTripItems extends Component {
     const { user } = this.props
     console.log(this.state.items)
     const submitFlag = this.state.items.some(item => (
-      item.assigned_to === ''
+      item.assigned_to === null
     ))
     if (this.state.items.length === 0) {
       return <h2>Items not added yet. Start adding items to the Trip</h2>
