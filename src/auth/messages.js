@@ -12,11 +12,12 @@ export default {
   createTripSuccess: 'Succesfully added a Trip!',
   createTripFailure: 'Failed to add a Trip. Enter valid data!',
   EditTripSuccess: 'Succesfully edited Trip Details!',
-  EditTripFailure: 'Failed to edit Trip Details. Check data!',
+  EditTripFailure: 'Failed to edit Trip Details. Check data/no authorization!',
   RemoveTripSuccess: 'Succesfully removed Trip!',
   RemoveTripFailure: 'Failed to remove Trip!',
   updateTripItemsSuccess: 'Succesfully added items to your list!',
   updateTripItemsFailure: 'Failed to add items to your list!',
   joinTripSuccess: 'Succesfully joined the Trip!',
-  joinTripFailure: 'Failed to join the Trip!'
+  joinTripFailure: 'Failed to join the Trip!',
+  deleteTripFailure: 'You cannot delete the trip'
 }
