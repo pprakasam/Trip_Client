@@ -29,12 +29,16 @@ class ShowTrip extends Component {
       .catch(console.log)
   }
   deleteTrip (id) {
+    const { alert } = this.props
     const { user } = this.props
     DeleteTrip(user, id)
       .then(() => this.setState({
         shouldRedirect: true
       }))
-      .catch(console.log)
+      .catch(error => {
+        console.error(error)
+        alert(messages.deleteTripFailure, 'danger')
+      })
   }
 
   joinTrip (id, place) {
@@ -62,7 +66,6 @@ class ShowTrip extends Component {
     const { user } = this.props
     const family = user.email.slice(0, (user.email.indexOf('@')))
     const { id, place, street, city, state, zip, tripfamilies } = this.state.trip
-    console.log(tripfamilies)
     if (this.state.shouldRedirect) {
       //      return <Redirect to="/movies" />
       return <Redirect to={{

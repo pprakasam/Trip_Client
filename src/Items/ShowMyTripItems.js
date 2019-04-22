@@ -15,7 +15,6 @@ class ShowMyTripItems extends Component {
 
   componentDidMount () {
     const tripId = this.props.match.params.id
-    console.log(tripId)
     const { user } = this.props
     const userName = user.email.slice(0, (user.email.indexOf('@')))
     ShowMyItems(user, userName, tripId)

@@ -25,7 +25,6 @@ class ShowTripItems extends Component {
 
   handleChange = (event) => {
     this.setState({ itemsArray: [ ...this.state.itemsArray, event.target.name ] })
-    console.log(this.state.itemsArray)
   }
 
   handleSubmit = (event) => {
@@ -37,7 +36,6 @@ class ShowTripItems extends Component {
       assigned_to: user.email.slice(0, (user.email.indexOf('@')))
     }
     this.setState({ itemsArray: [ ...this.state.itemsArray, event.target.name ] })
-    console.log(this.state.itemsArray)
     event.preventDefault()
     UpdateTripItems(user, tripId, this.state.itemsArray, userName, item)
       .then(() => alert(messages.updateTripItemsSuccess, 'success'))
@@ -50,7 +48,6 @@ class ShowTripItems extends Component {
 
   render () {
     const { user } = this.props
-    console.log(this.state.items)
     const submitFlag = this.state.items.some(item => (
       item.assigned_to === null
     ))

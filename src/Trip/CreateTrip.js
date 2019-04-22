@@ -28,8 +28,6 @@ class CreateTrip extends Component {
 
   handleChange = (event) => {
     const { user } = this.props
-    console.log(user)
-    console.log(event.target.name, event.target.value)
     this.setState({ trip: { ...this.state.trip,
       [event.target.name]: event.target.value,
       user_id: user.id
@@ -38,7 +36,6 @@ class CreateTrip extends Component {
 
   handleSubmit = (event) => {
     const { alert, history } = this.props
-    console.log(this.state.trip)
     const { trip } = this.state
     const { user } = this.props
     event.preventDefault()

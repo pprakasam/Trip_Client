@@ -40,7 +40,6 @@ class TripEdit extends Component {
   }
 
   handleChange = (event) => {
-    console.log(event.target.name, event.target.value)
     this.setState({ trip: { ...this.state.trip, [event.target.name]: event.target.value } })
   }
 
