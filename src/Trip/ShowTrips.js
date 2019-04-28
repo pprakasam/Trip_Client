@@ -33,7 +33,7 @@ class ShowTrips extends Component {
             <ul>
               {this.state.trips.map(trip => (
                 <li key={trip.id}>
-                  <h6><Link to={'/trips/' + trip.id}>{trip.place}</Link></h6>
+                  <h4><Link to={'/trips/' + trip.id}>{trip.place}</Link></h4>
                 </li>
               ))}
             </ul>

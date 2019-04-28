@@ -4,6 +4,8 @@ import { Redirect } from 'react-router'
 import { createTrip } from './TripAPI'
 import messages from '../auth/messages'
 import { withRouter } from 'react-router-dom'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 class CreateTrip extends Component {
   constructor () {
@@ -63,26 +65,46 @@ class CreateTrip extends Component {
       <Fragment>
         <div className="create-form">
           <div className="form-header">Enter Trip Details</div>
-          <form onSubmit={this.handleSubmit}>
-            <label htmlFor="place"><span>Place</span>
-              <input value={place} required name="place" onChange={this.handleChange}/></label>
-            <label htmlFor="street"><span>Street</span>
-              <input value={street} required name="street" onChange={this.handleChange}/></label>
-            <label htmlFor="city"><span>City</span>
-              <input value={city} required name="city" onChange={this.handleChange}/></label>
-            <label htmlFor="state"><span>State</span>
-              <input value={state} required name="state" onChange={this.handleChange}/></label>
-            <label htmlFor="zip"><span>Zip</span>
-              <input value={zip} required name="zip" onChange={this.handleChange}/></label>
-            <label htmlFor="from_date"><span>From</span>
-              <input name="from_date" required type="date" onChange={this.handleChange} /></label>
-            <label htmlFor="to_date"><span>To</span>
-              <input name="to_date" required type="date" onChange={this.handleChange} /></label>
-            <button type="submit">Submit</button>
-          </form>
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Group controlId="place">
+              <Form.Label>Place</Form.Label>
+              <Form.Control type="text" value={place}
+                required name="place" onChange={this.handleChange}/>
+            </Form.Group>
+            <Form.Group controlId="street">
+              <Form.Label>Street</Form.Label>
+              <Form.Control type="text" value={street}
+                required name="street" onChange={this.handleChange}/>
+            </Form.Group>
+            <Form.Group controlId="city">
+              <Form.Label>City</Form.Label>
+              <Form.Control type="text" value={city}
+                required name="city" onChange={this.handleChange}/>
+            </Form.Group>
+            <Form.Group controlId="state">
+              <Form.Label>State</Form.Label>
+              <Form.Control type="text" value={state}
+                required name="state" onChange={this.handleChange}/>
+            </Form.Group>
+            <Form.Group controlId="zip">
+              <Form.Label>Zip</Form.Label>
+              <Form.Control type="text" value={zip}
+                required name="zip" onChange={this.handleChange}/>
+            </Form.Group>
+            <Form.Group controlId="from_date">
+              <Form.Label>From</Form.Label>
+              <Form.Control type="date"
+                required name="from_date" onChange={this.handleChange}/>
+            </Form.Group>
+            <Form.Group controlId="to_date">
+              <Form.Label>To</Form.Label>
+              <Form.Control type="date"
+                required name="to_date" onChange={this.handleChange}/>
+            </Form.Group>
+            <Button variant="dark" type="submit">Submit</Button>
+          </Form>
         </div>
       </Fragment>
-
     )
   }
 }
