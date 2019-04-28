@@ -1,38 +1,27 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+import AuthenticatedOptions from './AuthenticatedOptions'
 
 import './Header.scss'
 
-const authenticatedOptions = (
-  <React.Fragment>
-    <Link to="/create-trip">Create Trip</Link>
-    <Link to="/trips">Show Trips</Link>
-    <Link to="/tripfamilies">My Trips</Link>
-    <Link to="/change-password">Change Password</Link>
-    <Link to="/sign-out">Sign Out</Link>
-  </React.Fragment>
-)
-
 const unauthenticatedOptions = (
   <React.Fragment>
-    <Link to="/sign-up">Sign Up</Link>
-    <Link to="/sign-in">Sign In</Link>
-  </React.Fragment>
-)
-
-const alwaysOptions = (
-  <React.Fragment>
-    <Link to="/">Home</Link>
+    <Navbar bg="dark" variant="dark" className="navbar">
+      <Navbar.Brand href="#home">Trip Planner</Navbar.Brand>
+      <Nav className="ml-auto">
+        <Nav.Link href="#sign-up">Sign Up</Nav.Link>
+        <Nav.Link href="#sign-in">Sign In</Nav.Link>
+      </Nav>
+    </Navbar>
   </React.Fragment>
 )
 
 const Header = ({ user }) => (
-  <header className="main-header">
-    <h1>Trip Planner</h1>
+  <header>
     <nav>
-      { user && <span>Welcome, {user.email}</span>}
-      { user ? authenticatedOptions : unauthenticatedOptions }
-      { alwaysOptions }
+      { user ? <AuthenticatedOptions user={user} /> : unauthenticatedOptions }
     </nav>
   </header>
 )

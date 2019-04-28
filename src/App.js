@@ -16,6 +16,7 @@ import MyTrips from './Trip/MyTrips'
 import CreateItem from './Items/CreateItem'
 import ShowTripItems from './Items/ShowTripItems'
 import ShowMyTripItems from './Items/ShowMyTripItems'
+import ImageUpload from './Trip/Firebase/ImageUpload'
 
 import Alert from 'react-bootstrap/Alert'
 
@@ -86,6 +87,9 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} exact path="/trips/:id/showmytripitems" render={(props) => (
             <ShowMyTripItems alert={this.alert} user={user} {...props}/>
+          )} />
+          <AuthenticatedRoute user={user} exact path="/trips/:id/photos" render={(props) => (
+            <ImageUpload alert={this.alert} user={user} {...props}/>
           )} />
         </main>
       </React.Fragment>
