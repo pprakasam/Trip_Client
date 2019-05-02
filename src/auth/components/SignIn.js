@@ -49,7 +49,7 @@ class SignIn extends Component {
         </Form.Group>
         <Form.Group controlId="password">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="passowrd" name="password" value={password}
+          <Form.Control type="password" name="password" value={password}
             placeholder="Password" onChange={this.handleChange} />
         </Form.Group>
         <Button variant="dark" type="submit">Sign In</Button>

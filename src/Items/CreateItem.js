@@ -15,8 +15,7 @@ class CreateItem extends Component {
       items: {
         item_name: '',
         assigned_to: '',
-        trip_id: '',
-        user_id: ''
+        trip_id: ''
       },
       created: false
     }
@@ -24,15 +23,12 @@ class CreateItem extends Component {
 
   handleChange = (event) => {
     const id = this.props.match.params.id
-    const { user } = this.props
     const tripId = 'trip_id'
-    const userId = 'user_id'
 
     if (['item_name'].includes(event.target.className)) {
       const items = [...this.state.moreItems]
       items[event.target.dataset.id][event.target.className] = event.target.value
       items[event.target.dataset.id][tripId] = id
-      items[event.target.dataset.id][userId] = user.id
       // this.setState({ items }, () => console.log(this.state.items))
       this.setState({ items })
     } else {

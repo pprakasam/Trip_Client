@@ -2,7 +2,8 @@ import React, { Component, Fragment } from 'react'
 import { storage } from './index.js'
 import { AddImage, ShowAllImages } from './PhotosAPI'
 import Gallery from './Gallery'
-// import messages from '../../auth/messages'
+import './Firebase.scss'
+import messages from '../../auth/messages'
 
 class ImageUpload extends Component {
   constructor () {
@@ -15,13 +16,14 @@ class ImageUpload extends Component {
 
   componentDidMount () {
     const { user } = this.props
-    // const tripId = this.props.match.params.id
-    ShowAllImages(user)
+    const tripId = this.props.match.params.id
+    ShowAllImages(user, tripId)
       .then(response => this.setState({
         photos: response.data.photos
       }))
       .catch(console.log)
   }
+
   handleChange = (e) => {
     if (e.target.files[0]) {
       const image = e.target.files[0]
@@ -30,6 +32,7 @@ class ImageUpload extends Component {
   }
 
   handleUpload = () => {
+    const { alert } = this.props
     const photo = {
       image: '',
       trip_id: this.props.match.params.id
@@ -51,12 +54,14 @@ class ImageUpload extends Component {
           .then(function (downloadURL) {
             photo.image = downloadURL
             AddImage(user, photo)
-              .then(console.log)
-              .catch(console.log)
+              .then(() => alert(messages.addImageSuccess, 'success'))
+              .catch(error => {
+                console.error(error)
+                alert(messages.addImageFailure, 'danger')
+              })
           })
-      }
-
-    )
+      })
+    this.forceUpdate()
   }
 
   // .then(() => alert(messages.createTripSuccess, 'success'))
@@ -72,17 +77,19 @@ class ImageUpload extends Component {
     if (this.state.url) {
       console.log(this.state.url)
       return <Fragment>
-        <img src={ this.state.url } width="300" height="300"/>
-        <a href={ this.state.url } target="_blank" rel="noopener noreferrer">Photo 1</a>
+        <div className="photos">
+          <img src={ this.state.url } width="300" height="300"/>
+          <a href={ this.state.url } target="_blank" rel="noopener noreferrer">Photo 1</a>
+        </div>
       </Fragment>
     }
     return (
       <Fragment>
-        <div>
+        <div className="photos">
           <Gallery imageUrls={ urls } />
         </div>
-        <div>
-          <h3> Upload Photos </h3>
+        <div className="photo-form">
+          <div className="form-header">Upload Photos</div>
           <input type="file" onChange={this.handleChange} />
           <button onClick={this.handleUpload}>Upload</button>
         </div>
