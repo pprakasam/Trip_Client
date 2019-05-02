@@ -44,7 +44,9 @@ class ShowMyTripItems extends Component {
     }
 
     if (this.state.items.length === 0) {
-      return <h2>No items to show. Select items you like to bring to the Trip</h2>
+      return <div className="no-data">
+        <h3>No items to show. Select items you like to bring to the Trip</h3>
+      </div>
     }
 
     return (

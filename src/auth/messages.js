@@ -19,5 +19,7 @@ export default {
   updateTripItemsFailure: 'Failed to add items to your list!',
   joinTripSuccess: 'Succesfully joined the Trip!',
   joinTripFailure: 'Failed to join the Trip!',
-  deleteTripFailure: 'You cannot delete the trip'
+  deleteTripFailure: 'You cannot delete the trip',
+  addImageSuccess: 'Succesfully added Photo!',
+  addImageFailure: 'Failed to add Photo!'
 }

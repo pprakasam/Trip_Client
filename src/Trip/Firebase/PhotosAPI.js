@@ -12,9 +12,9 @@ export const AddImage = (user, photo) => {
   })
 }
 
-export const ShowAllImages = (user) => {
+export const ShowAllImages = (user, tripId) => {
   return axios({
-    url: apiUrl + '/photos',
+    url: apiUrl + `/tripphotos/${tripId}`,
     method: 'GET',
     headers: {
       'Authorization': `Token token=${user.token}`

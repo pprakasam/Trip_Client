@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { Redirect } from 'react-router'
-import { ShowOneTrip, DeleteTrip, JoinTrip } from './TripAPI'
+import { ShowOneTrip, JoinTrip } from './TripAPI'
 import './Trip.scss'
 import messages from '../auth/messages'
-// import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react'
+import MapContainer from './Map/MapContainer'
 
 class ShowTrip extends Component {
   constructor () {
@@ -26,20 +26,32 @@ class ShowTrip extends Component {
       .then(response => this.setState({
         trip: response.data.trip
       }))
+      // .then(function (response) {
+      //   Geocode.fromAddress(response.data.trip.street + ',' + response.data.trip.city + ',' +
+      //   ',' + response.data.trip.state + ',' + response.data.trip.zip).then(
+      //     resp => {
+      //       const { lat, lng } = resp.results[0].geometry.location
+      //       console.log(lat, lng)
+      //     },
+      //     error => {
+      //       console.error(error)
+      //     }
+      //   )
+      // })
       .catch(console.log)
   }
-  deleteTrip (id) {
-    const { alert } = this.props
-    const { user } = this.props
-    DeleteTrip(user, id)
-      .then(() => this.setState({
-        shouldRedirect: true
-      }))
-      .catch(error => {
-        console.error(error)
-        alert(messages.deleteTripFailure, 'danger')
-      })
-  }
+  // deleteTrip (id) {
+  //   const { alert } = this.props
+  //   const { user } = this.props
+  //   DeleteTrip(user, id)
+  //     .then(() => this.setState({
+  //       shouldRedirect: true
+  //     }))
+  //     .catch(error => {
+  //       console.error(error)
+  //       alert(messages.deleteTripFailure, 'danger')
+  //     })
+  // }
 
   joinTrip (id, place) {
     const { alert, history } = this.props
@@ -66,8 +78,8 @@ class ShowTrip extends Component {
     const { user } = this.props
     const family = user.email.slice(0, (user.email.indexOf('@')))
     const { id, place, street, city, state, zip, tripfamilies } = this.state.trip
+    const address = street + ',' + city + ',' + state + ',' + zip
     if (this.state.shouldRedirect) {
-      //      return <Redirect to="/movies" />
       return <Redirect to={{
         pathname: '/trips', state: { message: 'Successfully Deleted Trip!' }
       }} />
@@ -90,7 +102,7 @@ class ShowTrip extends Component {
           <h6>{state}</h6>
           <h6>{zip}</h6>
           <h6> <span className="span-heading">From:</span> {this.state.trip.from_date} <span className="span-heading">To:</span>  {this.state.trip.to_date}</h6>
-          <h6> <span className="span-heading">People Joined the Trip</span></h6>
+          <h6> <span className="span-heading">People who joined the Trip</span></h6>
           <ul>
             {tripfamilies.map(trip => (
               <li key={trip.id}>
@@ -117,13 +129,13 @@ class ShowTrip extends Component {
           )) &&
           <Fragment>
             <Link to={this.props.match.url + '/edit'}><button>Edit</button></Link>
-            <button type="button" onClick={() => this.deleteTrip(id)}>Delete</button>
             <Link to={this.props.match.url + '/photos'}><button>Photos</button></Link>
             <Link to={this.props.match.url + '/items'}><button>Add Items</button></Link>
             <Link to={this.props.match.url + '/showtripitems'}><button>Show Items</button></Link>
           </Fragment>
           }
         </div>
+        <MapContainer address={ address }/>
       </Fragment>
     )
   }
