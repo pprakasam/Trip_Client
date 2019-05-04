@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react'
 import Geocode from 'react-geocode'
 
-Geocode.setApiKey('AIzaSyAXvi1PcPpNvSdVrl0LN5nCzOYMOrotyVQ')
+const API_KEY = `${process.env.REACT_APP_GOOGLE_API_KEY}`
+Geocode.setApiKey(API_KEY)
 
 const mapStyles = {
   width: '50%',
@@ -58,5 +59,5 @@ export class MapContainer extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyAXvi1PcPpNvSdVrl0LN5nCzOYMOrotyVQ'
+  apiKey: API_KEY
 })(MapContainer)
