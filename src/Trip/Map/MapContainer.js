@@ -23,6 +23,7 @@ export class MapContainer extends Component {
   }
   componentDidMount () {
     console.log(this.props.address)
+    console.log(process.env.REACT_APP_GOOGLE_API_KEY)
     Geocode.fromAddress(this.props.address)
       .then(response => {
         this.setState({
@@ -40,7 +41,7 @@ export class MapContainer extends Component {
   }
   render () {
     const { latitude, longitude, rendered } = this.state
-
+    // console.log(this.state.latitude, this.state.longitude)
     if (!rendered) return <h1>Loading...</h1>
     return (
       <Map
